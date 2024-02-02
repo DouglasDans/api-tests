@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Entity
 public class Autor {
     @Id
@@ -12,9 +15,17 @@ public class Autor {
     private Long id;
 
     private String nome;
+    private String nacionalidade;
+    private LocalDate dataNascimento;
 
-    public Autor(String nome) {
+    public Autor(String nome, String nacionalidade, String dataNascimento) {
         this.nome = nome;
+        this.nacionalidade = nacionalidade;
+        this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd-MM-uuuu"));
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
@@ -23,5 +34,21 @@ public class Autor {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getNacionalidade() {
+        return nacionalidade;
+    }
+
+    public void setNacionalidade(String nacionalidade) {
+        this.nacionalidade = nacionalidade;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd-MM-uuuu"));
     }
 }
