@@ -18,6 +18,7 @@ public class Autor {
     private String nacionalidade;
     private LocalDate dataNascimento;
 
+    public Autor(){}
     public Autor(String nome, String nacionalidade, String dataNascimento) {
         this.nome = nome;
         this.nacionalidade = nacionalidade;
