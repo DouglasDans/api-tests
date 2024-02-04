@@ -15,6 +15,8 @@ public class Editora {
    private String cnpj;
    private String pais;
 
+   public Editora(){}
+
    public Editora(String nome, String cnpj, String pais) {
       this.nome = nome;
       this.cnpj = cnpj;
