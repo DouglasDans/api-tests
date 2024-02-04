@@ -1,5 +1,6 @@
-package com.livros.livros.model;
+package com.livros.livros.model.repositories;
 
+import com.livros.livros.model.entities.Editora;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

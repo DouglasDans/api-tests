@@ -27,7 +27,7 @@ public class AutorAPIController {
     public ResponseEntity<Object> consultaAutor(){
         log.info(">>>> [Controller] consultaAutor iniciado");
 
-        return ResponseEntity.status(HttpStatus.OK).body(autorService.consultaAutor());
+        return ResponseEntity.status(HttpStatus.OK).body(autorService.find());
     }
 
 }
