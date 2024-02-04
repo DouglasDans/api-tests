@@ -3,11 +3,12 @@ package com.livros.livros.service;
 import com.livros.livros.model.entities.Autor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IAutorService {
 
     public List<Autor> find();
 
-    public Autor insert(Autor obj);
+    public Optional<Autor> insert(Autor obj);
 
 }

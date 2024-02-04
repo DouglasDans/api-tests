@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AutorService implements IAutorService {
@@ -20,14 +21,16 @@ public class AutorService implements IAutorService {
 
     @Override
     public List<Autor> find() {
-        log.info(">>>> [AutorService] consultaAutor iniciado");
+        log.info(">>>> [AutorService] find iniciado");
 
         return autorRepository.findAll();
     }
 
     @Override
-    public Autor insert(Autor obj) {
-        return autorRepository.save(obj);
+    public Optional<Autor> insert(Autor obj) {
+        log.info(">>>> [AutorService] insert iniciado");
+
+        return Optional.of(autorRepository.save(obj));
     }
 
 
