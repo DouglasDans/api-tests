@@ -25,6 +25,8 @@ public class Livro {
     @JoinColumn(name = "idEditora", referencedColumnName = "id")
     private Editora editora;
 
+    public Livro(){}
+
     public Livro(String isbn, String titulo, String assunto, LocalDate dataPublicacao, String anoPublicacao, int edicao, Autor autor, Editora editora) {
         this.isbn = isbn;
         this.titulo = titulo;
