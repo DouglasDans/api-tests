@@ -13,4 +13,8 @@ public interface IAutorService {
 
     public Optional<Autor> insert(Autor obj);
 
+    public Optional<Autor> update(Autor obj);
+
+    public void delete(Long id);
+
 }

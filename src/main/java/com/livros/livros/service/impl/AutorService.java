@@ -3,10 +3,12 @@ package com.livros.livros.service.impl;
 import com.livros.livros.model.entities.Autor;
 import com.livros.livros.model.repositories.IAutorRepository;
 import com.livros.livros.service.IAutorService;
+import com.livros.livros.service.exception.DatabaseException;
 import com.livros.livros.service.exception.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +17,12 @@ import java.util.Optional;
 @Service
 public class AutorService implements IAutorService {
 
-    Logger log = LogManager.getLogger(getClass());
+    private Logger log = LogManager.getLogger(AutorService.class);
+    private final IAutorRepository autorRepository;
 
-    @Autowired
-    IAutorRepository autorRepository;
+    public AutorService(IAutorRepository autorRepository) {
+        this.autorRepository = autorRepository;
+    }
 
     @Override
     public List<Autor> find() {
@@ -43,5 +47,29 @@ public class AutorService implements IAutorService {
         return Optional.of(autorRepository.save(obj));
     }
 
+    @Override
+    public Optional<Autor> update(Autor obj) {
+        try{
+            Autor entidade = autorRepository.getReferenceById(obj.getId());
+            updateData(entidade, obj);
+            return Optional.of(autorRepository.save(entidade));
+        } catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(obj.getId());
+        }
+    }
 
+    private void updateData(Autor entidade, Autor obj){
+        entidade.setNome(obj.getNome());
+        entidade.setDataNascimento(obj.getDataNascimento().toString());
+        entidade.setNacionalidade(obj.getNacionalidade());
+    }
+
+    @Override
+    public void delete(Long id) {
+        try{
+            autorRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
 }

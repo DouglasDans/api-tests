@@ -1,12 +1,10 @@
 package com.livros.livros.controller;
 
 import com.livros.livros.model.entities.Autor;
-import com.livros.livros.model.repositories.IAutorRepository;
-import com.livros.livros.service.IAutorService;
+import com.livros.livros.service.impl.AutorService;
 import jakarta.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,11 +14,10 @@ import java.util.Optional;
 @RequestMapping(value = "api/v1/autor")
 public class AutorAPIController {
 
-    Logger log = LogManager.getLogger(AutorAPIController.class);
+    private final AutorService autorService;
+    private Logger log = LogManager.getLogger(AutorAPIController.class);
 
-    private final IAutorService autorService;
-
-    public AutorAPIController(IAutorService autorService) {
+    public AutorAPIController(AutorService autorService) {
         this.autorService = autorService;
     }
 
@@ -53,4 +50,23 @@ public class AutorAPIController {
         return ResponseEntity.ok().body(autorService.insert(autor));
     }
 
+    @CrossOrigin
+    @PatchMapping
+    @Transactional
+    public ResponseEntity<Object> updateAutor(@RequestBody Autor autor){
+        log.info(">>>> [Controller] updateAutor iniciado");
+
+        return ResponseEntity.ok().body(autorService.update(autor));
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Object> deleteAutor(@PathVariable Long id){
+        log.info(">>>> [Controller] deleteAutor iniciado");
+
+        autorService.delete(id);
+
+        return ResponseEntity.ok("deu bom");
+    }
 }
