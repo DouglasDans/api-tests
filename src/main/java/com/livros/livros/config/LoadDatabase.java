@@ -14,7 +14,7 @@ import java.util.Arrays;
 //@Profile("dev")
 public class LoadDatabase {
 
-    Logger log = LogManager.getLogger(getClass());
+    Logger log = LogManager.getLogger(LoadDatabase.class);
 
     @Bean
     CommandLineRunner initDatabase(
