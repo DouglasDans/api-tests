@@ -1,26 +1,28 @@
 package com.livros.livros.controller;
 
 import com.livros.livros.model.entities.Autor;
+import com.livros.livros.model.repositories.IAutorRepository;
 import com.livros.livros.service.IAutorService;
 import jakarta.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "api/v1/autor")
 public class AutorAPIController {
 
-    Logger log = LogManager.getLogger(getClass());
+    Logger log = LogManager.getLogger(AutorAPIController.class);
 
-    @Autowired
-    IAutorService autorService;
+    private final IAutorService autorService;
+
+    public AutorAPIController(IAutorService autorService) {
+        this.autorService = autorService;
+    }
 
     @CrossOrigin
     @GetMapping
