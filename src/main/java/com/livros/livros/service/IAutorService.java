@@ -9,6 +9,8 @@ public interface IAutorService {
 
     public List<Autor> find();
 
+    public Optional<Autor> findById(Long id);
+
     public Optional<Autor> insert(Autor obj);
 
 }

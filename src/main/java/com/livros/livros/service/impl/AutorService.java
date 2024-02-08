@@ -3,6 +3,7 @@ package com.livros.livros.service.impl;
 import com.livros.livros.model.entities.Autor;
 import com.livros.livros.model.repositories.IAutorRepository;
 import com.livros.livros.service.IAutorService;
+import com.livros.livros.service.exception.ResourceNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,15 @@ public class AutorService implements IAutorService {
         log.info(">>>> [AutorService] find iniciado");
 
         return autorRepository.findAll();
+    }
+
+    @Override
+    public Optional<Autor> findById(Long id) {
+        log.info(">>>> [AutorService] findById(" + id +") iniciado");
+
+        Optional<Autor> autor = autorRepository.findById(id);
+
+        return Optional.ofNullable(autor.orElseThrow(() -> new ResourceNotFoundException(id)));
     }
 
     @Override

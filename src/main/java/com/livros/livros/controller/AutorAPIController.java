@@ -10,8 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping(value = "api/v1/autor")
 public class AutorAPIController {
 
     Logger log = LogManager.getLogger(getClass());
@@ -20,20 +23,32 @@ public class AutorAPIController {
     IAutorService autorService;
 
     @CrossOrigin
-    @GetMapping("autor")
+    @GetMapping
     @Transactional
     public ResponseEntity<Object> consultaAutor(){
         log.info(">>>> [Controller] consultaAutor iniciado");
 
-        return ResponseEntity.status(HttpStatus.OK).body(autorService.find());
+        return ResponseEntity.ok().body(autorService.find());
     }
+
     @CrossOrigin
-    @PostMapping("autor")
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity<Object> consultaAutorPorId(@PathVariable Long id){
+        log.info(">>>> [Controller] consultaAutorPorId iniciado");
+
+        Optional<Autor> autor = autorService.findById(id);
+
+        return ResponseEntity.ok().body(autor);
+    }
+
+    @CrossOrigin
+    @PostMapping
     @Transactional
     public ResponseEntity<Object> inserirAutor(@RequestBody Autor autor){
         log.info(">>>> [Controller] inserirAutor iniciado");
 
-        return ResponseEntity.status(HttpStatus.OK).body(autorService.insert(autor));
+        return ResponseEntity.ok().body(autorService.insert(autor));
     }
 
 }
