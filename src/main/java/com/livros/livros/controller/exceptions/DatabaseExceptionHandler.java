@@ -1,5 +1,6 @@
 package com.livros.livros.controller.exceptions;
 
+import com.livros.livros.service.exception.DatabaseException;
 import com.livros.livros.service.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,6 +21,17 @@ public class DatabaseExceptionHandler {
         String error = "Dado não encontrado no banco de dados";
 
         ErrorResponse httpError = new ErrorResponse(HttpStatus.NOT_FOUND, error, e.getMessage(), req.getRequestURI());
+
+        log.error(">>>> [DatabaseExceptionHandler] " + error + " - Path: " + httpError.getPath());
+
+        return new ResponseEntity<ErrorResponse>(httpError, httpError.getStatus());
+    }
+
+    @ExceptionHandler(DatabaseException.class)
+    public ResponseEntity<ErrorResponse> databaseException(DatabaseException e, HttpServletRequest req) {
+        String error = "A requisição não pôde ser realizada pelo banco de dados";
+
+        ErrorResponse httpError = new ErrorResponse(HttpStatus.BAD_REQUEST, error, e.getMessage(), req.getRequestURI());
 
         log.error(">>>> [DatabaseExceptionHandler] " + error + " - Path: " + httpError.getPath());
 

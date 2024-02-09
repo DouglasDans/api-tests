@@ -5,6 +5,7 @@ import com.livros.livros.model.repositories.IAutorRepository;
 import com.livros.livros.service.IAutorService;
 import com.livros.livros.service.exception.DatabaseException;
 import com.livros.livros.service.exception.ResourceNotFoundException;
+import com.livros.livros.util.Util;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,10 +68,18 @@ public class AutorService implements IAutorService {
 
     @Override
     public void delete(Long id) {
+        log.info(">>>> [" + Util.getFunctionName() + " iniciado]");
         try{
-            autorRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
+            deleteData(id);
+        } catch (ResourceNotFoundException e) {
             throw new DatabaseException(e.getMessage());
         }
+    }
+
+    private void deleteData(Long id){
+        Optional<Autor> autor = findById(id);
+
+        autorRepository.deleteById(id);
+
     }
 }
