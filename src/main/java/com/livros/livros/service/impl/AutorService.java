@@ -49,6 +49,7 @@ public class AutorService implements IAutorService {
 
     @Override
     public Optional<Autor> update(Autor obj) {
+        log.info(">>>> [AutorService update iniciado]");
         try{
             Autor entidade = autorRepository.getReferenceById(obj.getId());
             updateData(entidade, obj);

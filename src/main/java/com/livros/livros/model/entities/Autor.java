@@ -22,7 +22,7 @@ public class Autor {
     public Autor(String nome, String nacionalidade, String dataNascimento) {
         this.nome = nome;
         this.nacionalidade = nacionalidade;
-        this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd-MM-uuuu"));
+        this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 
     public Long getId() {
@@ -50,6 +50,6 @@ public class Autor {
     }
 
     public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd-MM-uuuu"));
+        this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 }

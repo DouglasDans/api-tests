@@ -21,7 +21,7 @@ public class LoadDatabase {
             IAutorRepository autorRepository
     ) {
         return args -> {
-            Autor autor1 = new Autor("Valdir Azevedo", "Brasileiro", "10-06-1967");
+            Autor autor1 = new Autor("Valdir Azevedo", "Brasileiro", "1967-10-06");
 
             autorRepository.saveAll(Arrays.asList(autor1));
 
