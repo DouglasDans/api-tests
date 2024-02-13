@@ -1,0 +1,55 @@
+package com.livros.livros.service.impl;
+
+import com.livros.livros.model.entities.Autor;
+import com.livros.livros.model.entities.Editora;
+import com.livros.livros.model.repositories.IEditoraRepository;
+import com.livros.livros.service.IEditoraService;
+import com.livros.livros.service.exception.ResourceNotFoundException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.List;
+import java.util.Optional;
+
+public class EditoraService implements IEditoraService {
+
+    private final Logger log = LogManager.getLogger(getClass());
+    private final IEditoraRepository editoraRepository;
+
+    public EditoraService(IEditoraRepository editoraRepository) {
+        this.editoraRepository = editoraRepository;
+    }
+
+    @Override
+    public List<Editora> find() {
+        log.info(">>>> [EditoraService] find iniciado");
+
+        return editoraRepository.findAll();
+    }
+
+    @Override
+    public Optional<Editora> findById(Long id) {
+        log.info(">>>> [EditoraService] findById(" + id +") iniciado");
+
+        Optional<Editora> editora = editoraRepository.findById(id);
+
+        return Optional.ofNullable(editora.orElseThrow(() -> new ResourceNotFoundException(id)));
+    }
+
+    @Override
+    public Optional<Editora> insert(Editora obj) {
+        log.info(">>>> [EditoraService] insert iniciado");
+
+        return Optional.of(editoraRepository.save(obj));
+    }
+
+    @Override
+    public Optional<Editora> update(Editora obj) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+}
