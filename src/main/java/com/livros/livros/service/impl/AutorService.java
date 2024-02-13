@@ -68,7 +68,7 @@ public class AutorService implements IAutorService {
 
     @Override
     public void delete(Long id) {
-        log.info(">>>> [" + Util.getFunctionName() + " iniciado]");
+        log.info(">>>> [delete iniciado]");
         try{
             deleteData(id);
         } catch (ResourceNotFoundException e) {
@@ -78,8 +78,6 @@ public class AutorService implements IAutorService {
 
     private void deleteData(Long id){
         Optional<Autor> autor = findById(id);
-
         autorRepository.deleteById(id);
-
     }
 }
