@@ -1,14 +1,12 @@
 package com.livros.livros.model.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Entity
+@Table(name = "tbAutor")
 public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
