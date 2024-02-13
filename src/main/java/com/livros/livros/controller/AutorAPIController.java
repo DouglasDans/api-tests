@@ -1,10 +1,15 @@
 package com.livros.livros.controller;
 
+import com.livros.livros.controller.response.HttpResponse;
 import com.livros.livros.model.entities.Autor;
 import com.livros.livros.service.impl.AutorService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,11 +67,16 @@ public class AutorAPIController {
     @CrossOrigin
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Object> deleteAutor(@PathVariable Long id){
+    public ResponseEntity<Object> deleteAutor(@PathVariable Long id, HttpServletRequest request){
         log.info(">>>> [Controller] deleteAutor iniciado");
 
         autorService.delete(id);
+        HttpResponse response = new HttpResponse();
 
-        return ResponseEntity.ok("deu bom");
+        response.setStatus(HttpStatus.OK);
+        response.setMessage("Autor id: " + id +" deletado com sucesso");
+        response.setPath(request.getRequestURI());
+
+        return ResponseEntity.ok(response);
     }
 }
