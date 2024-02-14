@@ -3,6 +3,7 @@ package com.livros.livros.model.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 public class Livro {
@@ -14,7 +15,6 @@ public class Livro {
     private String titulo;
     private String assunto;
     private LocalDate dataPublicacao;
-    private String anoPublicacao;
     private int edicao;
 
     @ManyToOne
@@ -27,12 +27,11 @@ public class Livro {
 
     public Livro(){}
 
-    public Livro(String isbn, String titulo, String assunto, LocalDate dataPublicacao, String anoPublicacao, int edicao, Autor autor, Editora editora) {
+    public Livro(String isbn, String titulo, String assunto, String dataPublicacao, int edicao, Autor autor, Editora editora) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.assunto = assunto;
-        this.dataPublicacao = dataPublicacao;
-        this.anoPublicacao = anoPublicacao;
+        this.dataPublicacao = LocalDate.parse(dataPublicacao, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
         this.edicao = edicao;
         this.autor = autor;
         this.editora = editora;
@@ -70,16 +69,8 @@ public class Livro {
         return dataPublicacao;
     }
 
-    public void setDataPublicacao(LocalDate dataPublicacao) {
-        this.dataPublicacao = dataPublicacao;
-    }
-
-    public String getAnoPublicacao() {
-        return anoPublicacao;
-    }
-
-    public void setAnoPublicacao(String anoPublicacao) {
-        this.anoPublicacao = anoPublicacao;
+    public void setDataPublicacao(String dataPublicacao) {
+        this.dataPublicacao = LocalDate.parse(dataPublicacao, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
     }
 
     public int getEdicao() {
