@@ -9,10 +9,12 @@ import com.livros.livros.service.exception.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EditoraService implements IEditoraService {
 
     private final Logger log = LogManager.getLogger(getClass());

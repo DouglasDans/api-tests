@@ -20,7 +20,7 @@ import java.util.Optional;
 public class AutorAPIController {
 
     private final AutorService autorService;
-    private Logger log = LogManager.getLogger(AutorAPIController.class);
+    private final Logger log = LogManager.getLogger(AutorAPIController.class);
 
     public AutorAPIController(AutorService autorService) {
         this.autorService = autorService;
