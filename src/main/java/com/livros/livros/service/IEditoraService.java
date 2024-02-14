@@ -1,6 +1,5 @@
 package com.livros.livros.service;
 
-import com.livros.livros.model.entities.Autor;
 import com.livros.livros.model.entities.Editora;
 
 import java.util.List;

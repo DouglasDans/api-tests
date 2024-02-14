@@ -1,6 +1,5 @@
 package com.livros.livros.service.impl;
 
-import com.livros.livros.model.entities.Autor;
 import com.livros.livros.model.entities.Editora;
 import com.livros.livros.model.repositories.IEditoraRepository;
 import com.livros.livros.service.IEditoraService;
