@@ -73,7 +73,6 @@ public class LivroAPIController {
 
         response.setStatus(HttpStatus.OK);
         response.setMessage("Livro id: " + id + " deletado com sucesso");
-        // Assuming `request` is available in your implementation (otherwise remove)
         response.setPath(request.getRequestURI());
 
         return ResponseEntity.ok(response);
