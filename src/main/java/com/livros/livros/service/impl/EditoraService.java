@@ -4,7 +4,9 @@ import com.livros.livros.model.entities.Autor;
 import com.livros.livros.model.entities.Editora;
 import com.livros.livros.model.repositories.IEditoraRepository;
 import com.livros.livros.service.IEditoraService;
+import com.livros.livros.service.exception.DatabaseException;
 import com.livros.livros.service.exception.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -45,11 +47,34 @@ public class EditoraService implements IEditoraService {
 
     @Override
     public Optional<Editora> update(Editora obj) {
-        return Optional.empty();
+        log.info(">>>> [AutorService update iniciado]");
+        try{
+            Editora entidade = editoraRepository.getReferenceById(obj.getId());
+            updateData(entidade, obj);
+            return Optional.of(editoraRepository.save(entidade));
+        } catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException(obj.getId());
+        }
+    }
+
+    private void updateData(Editora entidade, Editora obj){
+        entidade.setNome(obj.getNome());
+        entidade.setCnpj(obj.getCnpj());
+        entidade.setPais(obj.getPais());
     }
 
     @Override
     public void delete(Long id) {
+        log.info(">>>> [delete iniciado]");
+        try{
+            deleteData(id);
+        } catch (ResourceNotFoundException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
 
+    private void deleteData(Long id){
+        Optional<Editora> editora = findById(id);
+        editoraRepository.deleteById(id);
     }
 }
