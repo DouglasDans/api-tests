@@ -1,5 +1,9 @@
 ## API de Livros
 
-API Rest básica com CRUD completo de livros, feito em Spring.
+API RESTful com CRUD completo de livros, editores e autores.
 
-Criado principalmente para estudo de Java e aplicação das heurísticas do Clean Code.
+### Tecnologias utilizadas
+- Java
+- Spring
+- MySQL
+
