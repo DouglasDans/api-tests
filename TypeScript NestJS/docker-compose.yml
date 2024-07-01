@@ -1,0 +1,54 @@
+# docker-compose -f docker-compose.dev.yml up --watch
+
+services:
+  nestjs:
+    container_name: backend
+    build: . # pasta do dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    volumes:
+      - ./node_modules/@prisma:/app/node_modules/@prisma
+    develop: # Funcionalidades de dev
+      watch: # hot reload configs
+        - action: sync
+          path: . # pasta raíz do host
+          target: /app # pasta raíz do container
+          ignore:
+            - node_modules
+        - action: rebuild
+          path: package.json
+
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - 80:80
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+  
+  postgres:
+    container_name: pgs
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports: 
+      - 5432:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+  
+networks:
+  default:
+    name: local-network
+    external: true

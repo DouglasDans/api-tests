@@ -11,10 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copie o restante dos arquivos da aplicação
-COPY --chown=app:app . .
+COPY prisma ./prisma/
+COPY . .
 
-# Exponha a porta em que a aplicação irá rodar
-EXPOSE 8080
-
-# Comando para rodar a aplicação no modo desenvolvimento
 CMD ["npm", "run", "start:dev"]

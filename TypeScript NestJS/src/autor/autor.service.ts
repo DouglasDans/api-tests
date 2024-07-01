@@ -2,6 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { CreateAutorDto } from './dto/create-autor.dto';
 import { UpdateAutorDto } from './dto/update-autor.dto';
 
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
 @Injectable()
 export class AutorService {
   create(createAutorDto: CreateAutorDto) {
@@ -9,7 +13,8 @@ export class AutorService {
   }
 
   findAll() {
-    return 8;
+    console.log(prisma.livro.findMany());
+    return prisma.livro.findMany();
   }
 
   findOne(id: number) {

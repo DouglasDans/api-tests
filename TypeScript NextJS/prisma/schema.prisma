@@ -40,5 +40,4 @@ model Livro {
   autorId Int
   editora Editora @relation(fields: [editoraId], references: [id])
   editoraId Int
-
 }
