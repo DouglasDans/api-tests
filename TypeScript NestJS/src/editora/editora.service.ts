@@ -1,25 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-
-import { Autor } from '@prisma/client'
+import { Editora } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
-export class AutorService {
+export class EditoraService {
 
   constructor(private prisma: PrismaService) {}
 
-  create( data: Autor) {
-    return this.prisma.autor.create({
+  create( data: Editora) {
+    return this.prisma.editora.create({
       data: data
     })
   }
 
-  async findAll() : Promise<Autor[]>{
-    return this.prisma.autor.findMany();
+  async findAll() : Promise<Editora[]>{
+    return this.prisma.editora.findMany();
   }
 
-  findOne(id: number) : Promise<Autor> {    
-    return this.prisma.autor.findFirstOrThrow({
+  findOne(id: number) : Promise<Editora> {    
+    return this.prisma.editora.findFirstOrThrow({
       where: {
         id: id
       }
@@ -31,15 +30,15 @@ export class AutorService {
     });
   }
 
-  update(id: number, autor: Autor)  {
-    return this.prisma.autor.update({
+  update(id: number, autor: Editora)  {
+    return this.prisma.editora.update({
       where: {id : id},
       data: autor
     })
   }
 
   remove(id: number) {
-    return this.prisma.autor.delete({
+    return this.prisma.editora.delete({
       where: { id: id }
     })
   }
