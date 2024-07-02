@@ -24,22 +24,32 @@ export class EditoraService {
       }
     }).catch(e => {
       throw new HttpException({
-        message: "Dados não foram encontrados no banco - " + e.name,
+        message: "Dados não foram encontrados no banco - " + e,
         statusCode: HttpStatus.NOT_FOUND
       }, HttpStatus.NOT_FOUND)
-    });
+    })
   }
 
-  update(id: number, autor: Editora)  {
+  update(id: number, editora: Editora)  {
     return this.prisma.editora.update({
       where: {id : id},
-      data: autor
+      data: editora
+    }).catch(e => {
+      throw new HttpException({
+        message: "Dados não foram encontrados no banco - " + e.meta.cause,
+        statusCode: HttpStatus.NOT_FOUND
+      }, HttpStatus.NOT_FOUND)
     })
   }
 
   remove(id: number) {
     return this.prisma.editora.delete({
       where: { id: id }
+    }).catch(e => {
+      throw new HttpException({
+        message: "Dados não foram encontrados no banco - " + e.meta.cause,
+        statusCode: HttpStatus.NOT_FOUND
+      }, HttpStatus.NOT_FOUND)
     })
   }
 }

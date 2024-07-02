@@ -25,7 +25,7 @@ export class AutorService {
       }
     }).catch(e => {
       throw new HttpException({
-        message: "Dados não foram encontrados no banco - " + e.name,
+        message: "Dados não foram encontrados no banco - " + e,
         statusCode: HttpStatus.NOT_FOUND
       }, HttpStatus.NOT_FOUND)
     });
@@ -35,12 +35,22 @@ export class AutorService {
     return this.prisma.autor.update({
       where: {id : id},
       data: autor
+    }).catch(e => {
+      throw new HttpException({
+        message: "Dados não foram encontrados no banco - " + e.meta.cause,
+        statusCode: HttpStatus.NOT_FOUND
+      }, HttpStatus.NOT_FOUND)
     })
   }
 
   remove(id: number) {
     return this.prisma.autor.delete({
       where: { id: id }
+    }).catch(e => {
+      throw new HttpException({
+        message: "Dados não foram encontrados no banco - " + e.meta.cause,
+        statusCode: HttpStatus.NOT_FOUND
+      }, HttpStatus.NOT_FOUND)
     })
   }
 }
