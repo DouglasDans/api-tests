@@ -1,13 +1,12 @@
-import { IsDateString, IsString } from 'class-validator'
+import { IsDateString, IsString } from 'class-validator';
 
-export class CreateAutorDto{
+export class CreateAutorDto {
+  @IsString()
+  nome: string;
 
-   @IsString()
-   nome: string
+  @IsString()
+  nacionalidade: string;
 
-   @IsString()
-   nacionalidade: string
-
-   @IsDateString()
-   dataNascimento: Date
+  @IsDateString()
+  dataNascimento: Date;
 }

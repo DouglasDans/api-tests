@@ -1,10 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { EditoraService } from './editora.service';
 import { Editora } from '@prisma/client';
 
 @Controller('api/editora')
 export class EditoraController {
-  
   constructor(private readonly editoraService: EditoraService) {}
 
   @Post()

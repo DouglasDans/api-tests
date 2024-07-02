@@ -6,3 +6,4 @@ Repo para estudar criação de APIs em diferentes tecnologias para estudo e test
 - NestJS
 - Prisma ORM
 - MySQL
+- JavaScript Standard Style

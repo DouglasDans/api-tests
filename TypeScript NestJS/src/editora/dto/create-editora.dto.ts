@@ -1,13 +1,12 @@
-import { IsString } from "class-validator";
+import { IsString } from 'class-validator';
 
 export class CreateEditoraDto {
-   
-   @IsString()
-   nome: string
+  @IsString()
+  nome: string;
 
-   @IsString()
-   cnpj: string;
+  @IsString()
+  cnpj: string;
 
-   @IsString()
-   pais: string;
+  @IsString()
+  pais: string;
 }
