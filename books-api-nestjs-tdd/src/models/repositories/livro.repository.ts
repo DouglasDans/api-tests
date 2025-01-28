@@ -1,6 +1,6 @@
 import { Livro } from '../entities/livro.entity';
 
-export default interface AutorRepository {
+export default interface LivroRepository {
   create(): Promise<Livro>;
   getAll(): Promise<Livro[]>;
   getById(id: number): Promise<Livro>;
