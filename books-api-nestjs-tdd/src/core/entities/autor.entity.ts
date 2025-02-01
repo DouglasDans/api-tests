@@ -5,5 +5,5 @@ export class Autor {
   nome: string;
   nacionalidade: string;
   dataNascimento: Date;
-  livros: Livro[];
+  livros?: Livro[];
 }

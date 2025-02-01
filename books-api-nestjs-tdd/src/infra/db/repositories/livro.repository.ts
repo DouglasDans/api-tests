@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import LivroRepository from 'src/models/repositories/livro.repository';
-import { PrismaService } from '../prisma.service';
-import { Livro } from 'src/models/entities/livro.entity';
+import LivroRepository from 'src/core/interfaces/livro.repository';
+import { PrismaService } from '../prisma/prisma.service';
+import { Livro } from 'src/core/entities/livro.entity';
 
 @Injectable()
 export class PrismaLivroRepository implements LivroRepository {

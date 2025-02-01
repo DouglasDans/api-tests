@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import EditoraRepository from 'src/models/repositories/editora.repository';
-import { PrismaService } from '../prisma.service';
-import { Editora } from 'src/models/entities/editora.entity';
+import EditoraRepository from 'src/core/interfaces/editora.repository';
+import { PrismaService } from '../prisma/prisma.service';
+import { Editora } from 'src/core/entities/editora.entity';
 
 @Injectable()
 export class PrismaEditoraRepository implements EditoraRepository {
