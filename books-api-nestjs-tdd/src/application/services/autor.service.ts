@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import AutorRepository from '../../core/interfaces/autor-repository.interface';
-import { CreateAutorDto } from 'src/core/dto/autor.dto';
+import { CreateAutorDto, UpdateAutorDto } from 'src/core/dto/autor.dto';
 
 @Injectable()
 export default class AutorService {
@@ -20,6 +20,30 @@ export default class AutorService {
   async getAll() {
     try {
       return await this.autor.getAll();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async getById(id: number) {
+    try {
+      return await this.autor.getById(id);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async update(id: number, autorDto: UpdateAutorDto) {
+    try {
+      return await this.autor.update(id, autorDto);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async delete(id: number) {
+    try {
+      return await this.autor.delete(id);
     } catch (error) {
       console.error(error);
     }
