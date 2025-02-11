@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Autor } from 'src/core/entities/autor.entity';
 import AutorRepository from 'src/core/interfaces/autor-repository.interface';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateAutorDto } from 'src/application/dto/autor.dto';
+import { CreateAutorDto } from 'src/core/dto/autor.dto';
 
 @Injectable()
 export class PrismaAutorRepository implements AutorRepository {

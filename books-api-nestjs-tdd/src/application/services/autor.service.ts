@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import AutorRepository from '../interfaces/autor-repository.interface';
-import { CreateAutorDto } from 'src/application/dto/autor.dto';
+import AutorRepository from '../../core/interfaces/autor-repository.interface';
+import { CreateAutorDto } from 'src/core/dto/autor.dto';
 
 @Injectable()
 export default class AutorService {

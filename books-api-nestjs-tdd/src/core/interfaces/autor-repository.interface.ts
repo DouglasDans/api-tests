@@ -1,4 +1,4 @@
-import { CreateAutorDto } from '../../application/dto/autor.dto';
+import { CreateAutorDto } from '../dto/autor.dto';
 import { Autor } from '../entities/autor.entity';
 
 export default abstract class AutorRepository {

@@ -1,6 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
-import { CreateAutorDto } from '../dto/autor.dto';
-import AutorService from 'src/core/services/autor.service';
+import { CreateAutorDto } from '../../core/dto/autor.dto';
+import AutorService from 'src/application/services/autor.service';
 
 @Controller('api/autor')
 export class AutorController {

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import AutorService from 'src/core/services/autor.service';
+import AutorService from 'src/application/services/autor.service';
 import AutorRepository from '../../core/interfaces/autor-repository.interface';
 import { PrismaAutorRepository } from 'src/infra/db/repositories/autor.repository';
 import { AutorController } from '../controllers/autor.controller';
