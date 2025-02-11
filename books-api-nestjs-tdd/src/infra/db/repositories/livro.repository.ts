@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import LivroRepository from 'src/core/interfaces/livro.repository';
+import LivroRepository from 'src/core/interfaces/livro-repository.interface';
 import { PrismaService } from '../prisma/prisma.service';
 import { Livro } from 'src/core/entities/livro.entity';
 

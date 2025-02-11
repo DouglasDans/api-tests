@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Autor } from 'src/core/entities/autor.entity';
-import AutorRepository from 'src/core/interfaces/autor.repository';
+import AutorRepository from 'src/core/interfaces/autor-repository.interface';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateAutorDto } from 'src/application/dto/autor.dto';
 
@@ -18,8 +18,8 @@ export class PrismaAutorRepository implements AutorRepository {
     });
   }
 
-  getAll(): Promise<Autor[]> {
-    throw new Error('Method not implemented.');
+  async getAll(): Promise<Autor[]> {
+    return await this.prisma.autor.findMany();
   }
 
   getById(id: number): Promise<Autor> {

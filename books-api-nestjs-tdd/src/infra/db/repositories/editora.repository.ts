@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import EditoraRepository from 'src/core/interfaces/editora.repository';
+import EditoraRepository from 'src/core/interfaces/editora-repository.interface';
 import { PrismaService } from '../prisma/prisma.service';
 import { Editora } from 'src/core/entities/editora.entity';
 
