@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Autor } from 'src/core/entities/autor.entity';
 import AutorRepository from 'src/core/interfaces/autor-repository.interface';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateAutorDto } from 'src/core/dto/autor.dto';
+import { CreateAutorDto, UpdateAutorDto } from 'src/core/dto/autor.dto';
 
 @Injectable()
 export class PrismaAutorRepository implements AutorRepository {
@@ -22,15 +22,15 @@ export class PrismaAutorRepository implements AutorRepository {
     return await this.prisma.autor.findMany();
   }
 
-  getById(id: number): Promise<Autor> {
-    throw new Error('Method not implemented.');
+  async getById(id: number): Promise<Autor | null> {
+    return await this.prisma.autor.findFirst({ where: { id } });
   }
 
-  update(id: number): Promise<Autor> {
-    throw new Error('Method not implemented.');
+  async update(id: number, autorDto: UpdateAutorDto): Promise<Autor> {
+    return await this.prisma.autor.update({ where: { id }, data: autorDto });
   }
 
-  delete(id: number): Promise<Autor> {
-    throw new Error('Method not implemented.');
+  async delete(id: number): Promise<Autor> {
+    return await this.prisma.autor.delete({ where: { id } });
   }
 }
