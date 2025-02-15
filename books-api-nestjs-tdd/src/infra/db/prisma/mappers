@@ -1,0 +1,13 @@
+import { Autor as PrismaAutor } from '@prisma/client';
+import { Autor } from '../../../core/entities/autor.entity';
+
+export class PrismaAutorMapper {
+  static toDomain(raw: PrismaAutor) {
+    const autor = new Autor(
+      raw.id,
+      raw.nome,
+      raw.nacionalidade,
+      raw.dataNascimento,
+    );
+  }
+}
