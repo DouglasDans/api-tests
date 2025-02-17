@@ -2,6 +2,7 @@ import { Author } from "@/core/entities/author.entity";
 import IAuthorRepository from "@/core/repositories/author.repository.interface";
 import { PrismaClient } from "@/../node_modules/.prisma/client/index";
 import { PrismaAuthorMapper } from "../mappers/author.mapper";
+import { DatabaseDataNotFound } from "@/core/errors/database-not-found.error";
 
 export default class PrismaAuthorRepository implements IAuthorRepository {
   private prisma: PrismaClient;
@@ -17,11 +18,20 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       });
       return PrismaAuthorMapper.toDomain(prismaAuthor);
     } catch (error) {
-      throw new Error("erro no repository do prisma" + error);
+      throw new DatabaseDataNotFound();
     }
   }
-  getAll(): Promise<Author[]> {
-    throw new Error("Method not implemented.");
+  async getAll(): Promise<Author[]> {
+    try {
+      const authors = await this.prisma.author.findMany();
+      const mappedAuthors = authors.map((author) => {
+        return PrismaAuthorMapper.toDomain(author);
+      });
+
+      return mappedAuthors;
+    } catch (error) {
+      throw new DatabaseDataNotFound();
+    }
   }
   getById(id: number): Promise<Author | null> {
     throw new Error("Method not implemented.");
