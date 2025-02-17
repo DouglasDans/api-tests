@@ -1,6 +1,6 @@
-import { Author } from "src/core/entities/author.entity";
-import IAuthorRepository from "src/core/repositories/author.repository.interface";
-import { PrismaClient } from "src/../node_modules/.prisma/client/index";
+import { Author } from "@/core/entities/author.entity";
+import IAuthorRepository from "@/core/repositories/author.repository.interface";
+import { PrismaClient } from "@/../node_modules/.prisma/client/index";
 import { PrismaAuthorMapper } from "../mappers/author.mapper";
 
 export default class PrismaAuthorRepository implements IAuthorRepository {

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
     "outDir": "./dist",
     "rootDir": "./src",
     "target": "es2016",                                  
@@ -9,7 +10,7 @@
     "skipLibCheck": true,
 
     "paths": {
-      "src/*": ["./src/*"],
+      "@/*": ["./src/*"],
     }
   }
 }

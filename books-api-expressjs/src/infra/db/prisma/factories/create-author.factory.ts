@@ -1,4 +1,4 @@
-import { CreateAuthor } from "src/use-cases/create-author";
+import { CreateAuthor } from "@/use-cases/create-author";
 import PrismaAuthorRepository from "../repositories/author.repository";
 
 export class PrismaCreateAuthor {

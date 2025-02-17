@@ -1,5 +1,6 @@
-import { Author } from "src/core/entities/author.entity";
-import IAuthorRepository from "src/core/repositories/author.repository.interface";
+import { Author } from "@/core/entities/author.entity";
+import { MissingAttributesError } from "@/core/errors/missing-attributes-error";
+import IAuthorRepository from "@/core/repositories/author.repository.interface";
 
 interface AuthorRequest {
   name: string;
@@ -15,6 +16,10 @@ export class CreateAuthor {
     nationality,
     birthDate,
   }: AuthorRequest): Promise<Author> {
+    if (!name || !nationality || !birthDate) {
+      throw new MissingAttributesError();
+    }
+
     const author = new Author({
       name,
       nationality,

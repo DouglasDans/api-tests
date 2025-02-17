@@ -3,6 +3,8 @@
   "packageManager": "yarn@4.3.1",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "test": "vitest",
+    "coverage": "vitest run --coverage",
     "build": "tsc"
   },
   "dependencies": {
@@ -15,6 +17,7 @@
     "prisma": "^6.3.1",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.5"
   }
 }

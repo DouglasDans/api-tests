@@ -1,4 +1,4 @@
-import { Author } from "src/core/entities/author.entity";
+import { Author } from "@/core/entities/author.entity";
 import {
   Prisma,
   Author as PrismaAuthor,
