@@ -31,5 +31,14 @@ export class MockAuthorRepository implements IAuthorRepository {
       birthDate: new Date(authorRequest.birthDate) || author.birthDate,
     });
   });
-  delete = vi.fn();
+  delete = vi.fn(async (id: number) => {
+    const authorsList: Array<Author> = makeFakeAuthors(5);
+    const author = authorsList.find((author) => author.id === id) || null;
+
+    if (!author) {
+      throw new DatabaseDataNotFoundError();
+    }
+
+    return author;
+  });
 }
