@@ -21,6 +21,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       throw new DatabaseDataNotFound();
     }
   }
+
   async getAll(): Promise<Author[]> {
     try {
       const authors = await this.prisma.author.findMany();
@@ -33,6 +34,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       throw new DatabaseDataNotFound();
     }
   }
+
   async getById(id: number): Promise<Author | null> {
     try {
       const author = await this.prisma.author.findFirst({
@@ -48,6 +50,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       throw new DatabaseDataNotFound();
     }
   }
+
   async update(author: Author): Promise<Author> {
     try {
       const updatedAuthor = await this.prisma.author.update({
