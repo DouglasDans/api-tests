@@ -76,7 +76,7 @@ describe("UpdateAuthor", () => {
     expect(updatedAuthor.birthDate.toISOString()).toBe(authorRequest.birthDate);
   });
 
-  it("deve retornar um erro de DatabaseDataNotFoundError em um um id inexistente", async () => {
+  it("deve retornar um erro de DatabaseDataNotFoundError em um id inexistente", async () => {
     const updateAuthor = new UpdateAuthor(mockAuthorRepository);
     const authorRequest = {
       id: 353,
