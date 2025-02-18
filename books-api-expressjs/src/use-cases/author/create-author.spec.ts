@@ -6,6 +6,9 @@ import { Author } from "@/core/entities/author.entity";
 import { MissingAttributesError } from "@/core/errors/missing-attributes-error";
 
 describe("CreateAuthor", () => {
+  const mockAuthorRepository = new MockAuthorRepository();
+  const createAuthor = new CreateAuthor(mockAuthorRepository);
+
   it("deve converter a string de data para Date e salvar no repositório", async () => {
     const fakerDate = faker.date.between({
       from: "1970-01-01",
@@ -24,9 +27,6 @@ describe("CreateAuthor", () => {
       birthDate: fakerDate,
     });
 
-    const mockAuthorRepository = new MockAuthorRepository();
-    const createAuthor = new CreateAuthor(mockAuthorRepository);
-
     const result = await createAuthor.execute(requestAuthor);
 
     expect(mockAuthorRepository.create).toHaveBeenCalledTimes(1);
@@ -41,9 +41,6 @@ describe("CreateAuthor", () => {
   });
 
   it("deve propagar erro de atributos em falta", async () => {
-    const mockAuthorRepository = new MockAuthorRepository();
-    const createAuthor = new CreateAuthor(mockAuthorRepository);
-
     const error = new MissingAttributesError();
 
     await expect(

@@ -7,9 +7,9 @@ import { DatabaseDataNotFoundError } from "@/core/errors/database-not-found.erro
 
 describe("UpdateAuthor", () => {
   const mockAuthorRepository = new MockAuthorRepository();
+  const updateAuthor = new UpdateAuthor(mockAuthorRepository);
 
   it("deve atualizar nome do author", async () => {
-    const updateAuthor = new UpdateAuthor(mockAuthorRepository);
     const authorRequest = {
       id: 2,
       name: faker.person.fullName(),
@@ -30,7 +30,6 @@ describe("UpdateAuthor", () => {
   });
 
   it("deve atualizar nacionalidade do author", async () => {
-    const updateAuthor = new UpdateAuthor(mockAuthorRepository);
     const authorRequest = {
       id: 2,
       nationality: faker.location.country(),
@@ -51,7 +50,6 @@ describe("UpdateAuthor", () => {
   });
 
   it("deve atualizar data de nascimento do author", async () => {
-    const updateAuthor = new UpdateAuthor(mockAuthorRepository);
     const authorRequest = {
       id: 3,
       birthDate: faker.date
@@ -77,7 +75,6 @@ describe("UpdateAuthor", () => {
   });
 
   it("deve retornar um erro de DatabaseDataNotFoundError em um id inexistente", async () => {
-    const updateAuthor = new UpdateAuthor(mockAuthorRepository);
     const authorRequest = {
       id: 353,
       name: faker.person.fullName(),

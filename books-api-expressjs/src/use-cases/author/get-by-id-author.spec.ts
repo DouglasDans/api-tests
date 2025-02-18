@@ -4,10 +4,10 @@ import { GetAuthorById } from "./get-by-id-author";
 import { Author } from "@/core/entities/author.entity";
 
 describe("GetAuthorById", () => {
-  it("deve retornar um objeto de Author de acordo com o ID", async () => {
-    const mockAuthorRepository = new MockAuthorRepository();
-    const getAuthorById = new GetAuthorById(mockAuthorRepository);
+  const mockAuthorRepository = new MockAuthorRepository();
+  const getAuthorById = new GetAuthorById(mockAuthorRepository);
 
+  it("deve retornar um objeto de Author de acordo com o ID", async () => {
     const author = await getAuthorById.execute(1);
 
     expect(author).toBeInstanceOf(Author);
@@ -20,20 +20,12 @@ describe("GetAuthorById", () => {
   });
 
   it("deve retornar nulo de acordo com o ID", async () => {
-    const mockAuthorRepository = new MockAuthorRepository();
-    const getAuthorById = new GetAuthorById(mockAuthorRepository);
-
     const author = await getAuthorById.execute(7);
-
     expect(author).toBeNull();
   });
 
   it("deve retornar nulo para IDs negativos", async () => {
-    const mockAuthorRepository = new MockAuthorRepository();
-    const getAuthorById = new GetAuthorById(mockAuthorRepository);
-
     const author = await getAuthorById.execute(-24);
-
     expect(author).toBeNull();
   });
 });
