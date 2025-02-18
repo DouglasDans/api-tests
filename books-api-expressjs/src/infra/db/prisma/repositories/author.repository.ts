@@ -33,13 +33,42 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       throw new DatabaseDataNotFound();
     }
   }
-  getById(id: number): Promise<Author | null> {
-    throw new Error("Method not implemented.");
+  async getById(id: number): Promise<Author | null> {
+    try {
+      const author = await this.prisma.author.findFirst({
+        where: { id },
+      });
+
+      if (author === null) {
+        return null;
+      }
+
+      return PrismaAuthorMapper.toDomain(author);
+    } catch (error) {
+      throw new DatabaseDataNotFound();
+    }
   }
-  update(author: Author): Promise<Author> {
-    throw new Error("Method not implemented.");
+  async update(author: Author): Promise<Author> {
+    try {
+      const updatedAuthor = await this.prisma.author.update({
+        where: { id: author.id },
+        data: PrismaAuthorMapper.toPrisma(author),
+      });
+
+      return PrismaAuthorMapper.toDomain(updatedAuthor);
+    } catch (error) {
+      throw new DatabaseDataNotFound();
+    }
   }
-  delete(id: number): Promise<Author> {
-    throw new Error("Method not implemented.");
+  async delete(id: number): Promise<Author> {
+    try {
+      const deletedAuthor = await this.prisma.author.delete({
+        where: { id },
+      });
+
+      return PrismaAuthorMapper.toDomain(deletedAuthor);
+    } catch (error) {
+      throw new DatabaseDataNotFound();
+    }
   }
 }

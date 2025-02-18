@@ -1,5 +1,5 @@
-import { GetAllAuthors } from "@/use-cases/get-all-authors";
-import PrismaAuthorRepository from "../repositories/author.repository";
+import { GetAllAuthors } from "@/use-cases/author/get-all-authors";
+import PrismaAuthorRepository from "../../repositories/author.repository";
 
 export default class PrismaGetAllAuthors {
   static create() {

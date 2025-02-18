@@ -1,5 +1,5 @@
-import { CreateAuthor } from "@/use-cases/create-author";
-import PrismaAuthorRepository from "../repositories/author.repository";
+import { CreateAuthor } from "@/use-cases/author/create-author";
+import PrismaAuthorRepository from "../../repositories/author.repository";
 
 export class PrismaCreateAuthor {
   static create(): CreateAuthor {
