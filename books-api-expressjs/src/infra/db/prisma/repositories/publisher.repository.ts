@@ -1,7 +1,7 @@
 import { Publisher } from "@/core/entities/publisher.entity";
 import IPublisherRepository from "@/core/repositories/publisher.repository.interface";
 import { PrismaClient } from "@/../node_modules/.prisma/client/index";
-import { DatabaseDataNotFound } from "@/core/errors/database-not-found.error";
+import { DatabaseDataNotFoundError } from "@/core/errors/database-not-found.error";
 import { PrismaPublisherMapper } from "../mappers/publisher.mapper";
 
 export default class PrismaPublisherRepository implements IPublisherRepository {
@@ -18,7 +18,7 @@ export default class PrismaPublisherRepository implements IPublisherRepository {
       });
       return PrismaPublisherMapper.toDomain(prismaPublisher);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 
@@ -31,7 +31,7 @@ export default class PrismaPublisherRepository implements IPublisherRepository {
 
       return mappedPublishers;
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 
@@ -47,7 +47,7 @@ export default class PrismaPublisherRepository implements IPublisherRepository {
 
       return PrismaPublisherMapper.toDomain(publisher);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 
@@ -60,7 +60,7 @@ export default class PrismaPublisherRepository implements IPublisherRepository {
 
       return PrismaPublisherMapper.toDomain(updatedPublisher);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 
@@ -72,7 +72,7 @@ export default class PrismaPublisherRepository implements IPublisherRepository {
 
       return PrismaPublisherMapper.toDomain(deletedPublisher);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 }

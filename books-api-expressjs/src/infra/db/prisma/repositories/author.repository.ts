@@ -2,7 +2,7 @@ import { Author } from "@/core/entities/author.entity";
 import IAuthorRepository from "@/core/repositories/author.repository.interface";
 import { PrismaClient } from "@/../node_modules/.prisma/client/index";
 import { PrismaAuthorMapper } from "../mappers/author.mapper";
-import { DatabaseDataNotFound } from "@/core/errors/database-not-found.error";
+import { DatabaseDataNotFoundError } from "@/core/errors/database-not-found.error";
 
 export default class PrismaAuthorRepository implements IAuthorRepository {
   private prisma: PrismaClient;
@@ -18,7 +18,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       });
       return PrismaAuthorMapper.toDomain(prismaAuthor);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 
@@ -31,7 +31,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return mappedAuthors;
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 
@@ -47,7 +47,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(author);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 
@@ -60,7 +60,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(updatedAuthor);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
   async delete(id: number): Promise<Author> {
@@ -71,7 +71,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(deletedAuthor);
     } catch (error) {
-      throw new DatabaseDataNotFound();
+      throw new DatabaseDataNotFoundError();
     }
   }
 }
