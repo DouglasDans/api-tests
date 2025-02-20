@@ -5,6 +5,6 @@ export class DeleteAuthor {
 
   async execute(id: number) {
     const deletedAuthor = this.authorRepository.delete(id);
-    return deletedAuthor;
+    return await deletedAuthor;
   }
 }

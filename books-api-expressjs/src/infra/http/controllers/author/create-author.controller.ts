@@ -9,6 +9,7 @@ export default async function createAuthorRoute(
   const requestBody = req.body;
   const createAuthor = PrismaCreateAuthor.create();
 
+  res.status(201);
   res.json(
     await createAuthor.execute(requestBody).catch((error) => {
       next(error);

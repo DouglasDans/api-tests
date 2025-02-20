@@ -6,12 +6,12 @@ export default async function updateAuthorRoute(
   res: Response,
   next: NextFunction
 ) {
-  const data = req.body;
-  const updateAuthor = PrismaUpdateAuthor.create();
+  try {
+    const data = req.body;
+    const updateAuthor = PrismaUpdateAuthor.create();
 
-  res.json(
-    await updateAuthor.execute(data).catch((error) => {
-      next(error);
-    })
-  );
+    res.json(await updateAuthor.execute(data));
+  } catch (error) {
+    next(error);
+  }
 }

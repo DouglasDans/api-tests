@@ -7,11 +7,13 @@ export default async function getByIdAuthorRoute(
   res: Response,
   next: NextFunction
 ) {
-  const { id } = req.params;
-  const getByIdAuthor = PrismaGetByIdAuthor.create();
-  const authors = await getByIdAuthor.execute(parseInt(id)).catch((error) => {
-    next(error);
-  });
+  try {
+    const { id } = req.params;
+    const getByIdAuthor = PrismaGetByIdAuthor.create();
 
-  res.json(authors);
+    const authors = await getByIdAuthor.execute(parseInt(id));
+    res.json(authors);
+  } catch (error) {
+    next(error);
+  }
 }

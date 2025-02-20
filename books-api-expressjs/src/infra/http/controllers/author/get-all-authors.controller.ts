@@ -6,9 +6,12 @@ export default async function getAllAuthorsRoute(
   res: Response,
   next: NextFunction
 ) {
-  const getAllAuthors = PrismaGetAllAuthors.create();
-  const authors = await getAllAuthors.execute().catch((error) => {
+  try {
+    const getAllAuthors = PrismaGetAllAuthors.create();
+
+    const authors = await getAllAuthors.execute();
+    res.json(authors);
+  } catch (error) {
     next(error);
-  });
-  res.json(authors);
+  }
 }

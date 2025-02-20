@@ -11,6 +11,6 @@ authorRoutes.get("/author", getAllAuthorsRoute);
 authorRoutes.get("/author/:id", getByIdAuthorRoute);
 authorRoutes.post("/author", createAuthorRoute);
 authorRoutes.patch("/author", updateAuthorRoute);
-authorRoutes.delete("/author", deleteAuthorRoute);
+authorRoutes.delete("/author/:id", deleteAuthorRoute);
 
 export default authorRoutes;
