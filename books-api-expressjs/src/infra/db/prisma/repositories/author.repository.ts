@@ -54,7 +54,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
   async update(author: Author): Promise<Author> {
     try {
       const updatedAuthor = await this.prisma.author.update({
-        where: { id: author.id },
+        where: { id: author.getId() },
         data: PrismaAuthorMapper.toPrisma(author),
       });
 
@@ -66,9 +66,13 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
   async delete(id: number): Promise<Author> {
     try {
-      const deletedAuthor = await this.prisma.author.delete({
-        where: { id },
-      });
+      const deletedAuthor = await this.prisma.author
+        .delete({
+          where: { id },
+        })
+        .catch(() => {
+          throw new Error();
+        });
 
       return PrismaAuthorMapper.toDomain(deletedAuthor);
     } catch (error) {

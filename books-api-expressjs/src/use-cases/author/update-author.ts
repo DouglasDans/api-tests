@@ -1,4 +1,4 @@
-import { Author, IAutor } from "@/core/entities/author.entity";
+import { Author } from "@/core/entities/author.entity";
 import { NotFoundError } from "@/core/errors/not-found.error";
 import IAuthorRepository from "@/core/repositories/author.repository.interface";
 
@@ -29,10 +29,10 @@ export class UpdateAuthor {
     }
 
     const toUpdateAuthor = new Author({
-      id: findAuthor.id,
-      name: formattedAuthor.name || findAuthor.name,
-      nationality: formattedAuthor.nationality || findAuthor.nationality,
-      birthDate: formattedAuthor.birthDate || findAuthor.birthDate,
+      id: findAuthor.getId(),
+      name: formattedAuthor.name || findAuthor.getName(),
+      nationality: formattedAuthor.nationality || findAuthor.getNationality(),
+      birthDate: formattedAuthor.birthDate || findAuthor.getBirthDate(),
     });
 
     const authorUpdated = await this.authorRepository.update(toUpdateAuthor);

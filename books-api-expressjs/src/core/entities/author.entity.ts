@@ -9,22 +9,22 @@ export interface IAutor {
 }
 
 export class Author {
-  id?: number;
-  name: string;
-  nationality: string;
-  birthDate: Date;
-  books?: Book[];
+  private readonly id?: number;
+  private name: string;
+  private nationality: string;
+  private birthDate: Date;
+  private books?: Book[];
 
   constructor(data: IAutor) {
-    this.id = data.id;
+    this.id = data.id || undefined;
     this.name = data.name;
     this.nationality = data.nationality;
     this.birthDate = data.birthDate;
     this.books = data.books;
   }
 
-  getId(): number | null {
-    return this.id || null;
+  getId(): number | undefined {
+    return this.id || undefined;
   }
 
   getName(): string {
@@ -39,7 +39,7 @@ export class Author {
     return this.birthDate;
   }
 
-  getBooks(): Book[] | null {
-    return this.books || null;
+  getBooks(): Book[] | undefined {
+    return this.books || undefined;
   }
 }
