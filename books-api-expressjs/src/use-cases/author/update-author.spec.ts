@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { UpdateAuthor } from "./update-author";
 import { faker } from "@faker-js/faker";
 import { Author } from "@/core/entities/author.entity";
-import { DatabaseDataNotFoundError } from "@/core/errors/database-not-found.error";
+import { NotFoundError } from "@/core/errors/not-found.error";
 
 describe("UpdateAuthor", () => {
   const mockAuthorRepository = new MockAuthorRepository();
@@ -88,7 +88,7 @@ describe("UpdateAuthor", () => {
     };
 
     await expect(updateAuthor.execute(authorRequest)).rejects.toThrow(
-      DatabaseDataNotFoundError
+      NotFoundError
     );
   });
 });

@@ -2,7 +2,7 @@ import { Author } from "@/core/entities/author.entity";
 import IAuthorRepository from "@/core/repositories/author.repository.interface";
 import { vi } from "vitest";
 import makeFakeAuthors from "../utils/make-fake-authors";
-import { DatabaseDataNotFoundError } from "@/core/errors/database-not-found.error";
+import { NotFoundError } from "@/core/errors/not-found.error";
 
 export class MockAuthorRepository implements IAuthorRepository {
   create = vi.fn(async (author: Author): Promise<Author> => {
@@ -21,7 +21,7 @@ export class MockAuthorRepository implements IAuthorRepository {
       authorsList.find((author) => author.id === authorRequest.id) || null;
 
     if (!author) {
-      throw new DatabaseDataNotFoundError();
+      throw new NotFoundError();
     }
 
     return new Author({
@@ -31,12 +31,13 @@ export class MockAuthorRepository implements IAuthorRepository {
       birthDate: new Date(authorRequest.birthDate) || author.birthDate,
     });
   });
+
   delete = vi.fn(async (id: number) => {
     const authorsList: Array<Author> = makeFakeAuthors(5);
     const author = authorsList.find((author) => author.id === id) || null;
 
     if (!author) {
-      throw new DatabaseDataNotFoundError();
+      throw new NotFoundError();
     }
 
     return author;

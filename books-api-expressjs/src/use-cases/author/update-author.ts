@@ -1,4 +1,5 @@
 import { Author, IAutor } from "@/core/entities/author.entity";
+import { NotFoundError } from "@/core/errors/not-found.error";
 import IAuthorRepository from "@/core/repositories/author.repository.interface";
 
 interface AuthorRequest {
@@ -21,7 +22,20 @@ export class UpdateAuthor {
         : undefined,
     };
 
-    const authorUpdated = this.authorRepository.update(formattedAuthor);
+    const findAuthor = await this.authorRepository.getById(authorRequest.id);
+
+    if (!findAuthor) {
+      throw new NotFoundError();
+    }
+
+    const toUpdateAuthor = new Author({
+      id: findAuthor.id,
+      name: formattedAuthor.name || findAuthor.name,
+      nationality: formattedAuthor.nationality || findAuthor.nationality,
+      birthDate: formattedAuthor.birthDate || findAuthor.birthDate,
+    });
+
+    const authorUpdated = await this.authorRepository.update(toUpdateAuthor);
 
     return authorUpdated;
   }

@@ -2,7 +2,7 @@ import { Author } from "@/core/entities/author.entity";
 import IAuthorRepository from "@/core/repositories/author.repository.interface";
 import { PrismaClient } from "@/../node_modules/.prisma/client/index";
 import { PrismaAuthorMapper } from "../mappers/author.mapper";
-import { DatabaseDataNotFoundError } from "@/core/errors/database-not-found.error";
+import { NotFoundError } from "@/core/errors/not-found.error";
 
 export default class PrismaAuthorRepository implements IAuthorRepository {
   private prisma: PrismaClient;
@@ -17,8 +17,8 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
         data: PrismaAuthorMapper.toPrisma(author),
       });
       return PrismaAuthorMapper.toDomain(prismaAuthor);
-    } catch (error) {
-      throw new DatabaseDataNotFoundError();
+    } catch (error: any) {
+      throw new NotFoundError();
     }
   }
 
@@ -30,8 +30,8 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       });
 
       return mappedAuthors;
-    } catch (error) {
-      throw new DatabaseDataNotFoundError();
+    } catch (error: any) {
+      throw new NotFoundError();
     }
   }
 
@@ -42,12 +42,12 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       });
 
       if (author === null) {
-        return null;
+        throw new Error();
       }
 
       return PrismaAuthorMapper.toDomain(author);
-    } catch (error) {
-      throw new DatabaseDataNotFoundError();
+    } catch (error: any) {
+      throw new NotFoundError();
     }
   }
 
@@ -60,9 +60,10 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(updatedAuthor);
     } catch (error) {
-      throw new DatabaseDataNotFoundError();
+      throw new NotFoundError();
     }
   }
+
   async delete(id: number): Promise<Author> {
     try {
       const deletedAuthor = await this.prisma.author.delete({
@@ -71,7 +72,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(deletedAuthor);
     } catch (error) {
-      throw new DatabaseDataNotFoundError();
+      throw new NotFoundError();
     }
   }
 }

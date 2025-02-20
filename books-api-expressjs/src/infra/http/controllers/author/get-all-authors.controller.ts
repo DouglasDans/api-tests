@@ -1,8 +1,14 @@
 import PrismaGetAllAuthors from "@/infra/db/prisma/factories/author/get-all-authors.factory";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
-export default async function getAllAuthorsRoute(req: Request, res: Response) {
+export default async function getAllAuthorsRoute(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   const getAllAuthors = PrismaGetAllAuthors.create();
-  const authors = await getAllAuthors.execute();
+  const authors = await getAllAuthors.execute().catch((error) => {
+    next(error);
+  });
   res.json(authors);
 }

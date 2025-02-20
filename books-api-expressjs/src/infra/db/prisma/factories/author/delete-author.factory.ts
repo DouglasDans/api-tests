@@ -1,8 +1,11 @@
-export class PrismaDeleteAuthor {
-  static create(): DeleteA {
-    const repository = new PrismaAuthorRepository();
-    const createAuthor = new CreateAuthor(repository);
+import { DeleteAuthor } from "@/use-cases/author/delete-author";
+import PrismaAuthorRepository from "../../repositories/author.repository";
 
-    return createAuthor;
+export class PrismaDeleteAuthor {
+  static create(): DeleteAuthor {
+    const repository = new PrismaAuthorRepository();
+    const service = new DeleteAuthor(repository);
+
+    return service;
   }
 }

@@ -2,7 +2,7 @@ import { MockAuthorRepository } from "@/tests/mock-repositories/author.repositor
 import { describe, expect, it } from "vitest";
 import { DeleteAuthor } from "./delete-author";
 import { Author } from "@/core/entities/author.entity";
-import { DatabaseDataNotFoundError } from "@/core/errors/database-not-found.error";
+import { NotFoundError } from "@/core/errors/not-found.error";
 
 describe("DeleteAuthor", () => {
   const repository = new MockAuthorRepository();
@@ -23,6 +23,6 @@ describe("DeleteAuthor", () => {
   it("deve retornar um erro de DatabaseDataNotFoundError em um id inexistente", async () => {
     const deletedAuthor = deleteAuthor.execute(234);
 
-    await expect(deletedAuthor).rejects.toThrow(DatabaseDataNotFoundError);
+    await expect(deletedAuthor).rejects.toThrow(NotFoundError);
   });
 });
