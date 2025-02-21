@@ -36,8 +36,8 @@ export class Book {
     this.authors = data.authors;
   }
 
-  getId(): number | null {
-    return this.id || null;
+  getId(): number | undefined {
+    return this.id || undefined;
   }
 
   getIsbn(): string {

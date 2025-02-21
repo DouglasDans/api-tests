@@ -23,8 +23,8 @@ export class Publisher {
     this.books = data.books;
   }
 
-  getId(): number | null {
-    return this.id || null;
+  getId(): number | undefined {
+    return this.id || undefined;
   }
 
   getName(): string {
