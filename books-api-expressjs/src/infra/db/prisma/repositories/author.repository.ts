@@ -35,7 +35,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
     }
   }
 
-  async getById(id: number): Promise<Author | null> {
+  async getById(id: number): Promise<Author> {
     try {
       const author = await this.prisma.author.findFirst({
         where: { id },

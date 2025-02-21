@@ -18,9 +18,15 @@ export class MockAuthorRepository implements IAuthorRepository {
     return makeFakeAuthors(3);
   });
 
-  getById = vi.fn(async (id: number): Promise<Author | null> => {
+  getById = vi.fn(async (id: number): Promise<Author> => {
     const authorsList: Array<Author> = makeFakeAuthors(5);
-    return authorsList.find((author) => author.getId() === id) || null;
+    const author = authorsList.find((author) => author.getId() === id) || null;
+
+    if (!author) {
+      throw new NotFoundError("Author not found");
+    }
+
+    return author;
   });
 
   update = vi.fn(async (authorRequest: Author): Promise<Author> => {
@@ -30,7 +36,7 @@ export class MockAuthorRepository implements IAuthorRepository {
       null;
 
     if (!author) {
-      throw new NotFoundError();
+      throw new NotFoundError("Author not found");
     }
 
     return new Author({
@@ -47,7 +53,7 @@ export class MockAuthorRepository implements IAuthorRepository {
     const author = authorsList.find((author) => author.getId() === id) || null;
 
     if (!author) {
-      throw new NotFoundError();
+      throw new NotFoundError("Author not found");
     }
 
     return author;
