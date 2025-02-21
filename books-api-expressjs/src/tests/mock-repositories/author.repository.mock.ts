@@ -6,35 +6,45 @@ import { NotFoundError } from "@/core/errors/not-found.error";
 
 export class MockAuthorRepository implements IAuthorRepository {
   create = vi.fn(async (author: Author): Promise<Author> => {
-    return new Author({ ...author, id: 1 });
+    return new Author({
+      id: 1,
+      name: author.getName(),
+      birthDate: author.getBirthDate(),
+      nationality: author.getNationality(),
+    });
   });
+
   getAll = vi.fn(async (): Promise<Author[]> => {
     return makeFakeAuthors(3);
   });
+
   getById = vi.fn(async (id: number): Promise<Author | null> => {
     const authorsList: Array<Author> = makeFakeAuthors(5);
-    return authorsList.find((author) => author.id === id) || null;
+    return authorsList.find((author) => author.getId() === id) || null;
   });
+
   update = vi.fn(async (authorRequest: Author): Promise<Author> => {
     const authorsList: Array<Author> = makeFakeAuthors(5);
     const author =
-      authorsList.find((author) => author.id === authorRequest.id) || null;
+      authorsList.find((author) => author.getId() === authorRequest.getId()) ||
+      null;
 
     if (!author) {
       throw new NotFoundError();
     }
 
     return new Author({
-      id: author.id,
-      name: authorRequest.name || author.name,
-      nationality: authorRequest.nationality || author.nationality,
-      birthDate: new Date(authorRequest.birthDate) || author.birthDate,
+      id: author.getId(),
+      name: authorRequest.getName() || author.getName(),
+      nationality: authorRequest.getNationality() || author.getNationality(),
+      birthDate:
+        new Date(authorRequest.getBirthDate()) || author.getBirthDate(),
     });
   });
 
   delete = vi.fn(async (id: number) => {
     const authorsList: Array<Author> = makeFakeAuthors(5);
-    const author = authorsList.find((author) => author.id === id) || null;
+    const author = authorsList.find((author) => author.getId() === id) || null;
 
     if (!author) {
       throw new NotFoundError();
