@@ -25,8 +25,8 @@ describe("UpdateAuthor", () => {
     expect(updatedAuthor).toHaveProperty("birthDate");
     expect(updatedAuthor).toHaveProperty("books");
 
-    expect(updatedAuthor.id).toBe(authorRequest.id);
-    expect(updatedAuthor.name).toBe(authorRequest.name);
+    expect(updatedAuthor.getId()).toBe(authorRequest.id);
+    expect(updatedAuthor.getName()).toBe(authorRequest.name);
   });
 
   it("deve atualizar nacionalidade do author", async () => {
@@ -45,8 +45,8 @@ describe("UpdateAuthor", () => {
     expect(updatedAuthor).toHaveProperty("birthDate");
     expect(updatedAuthor).toHaveProperty("books");
 
-    expect(updatedAuthor.id).toBe(authorRequest.id);
-    expect(updatedAuthor.nationality).toBe(authorRequest.nationality);
+    expect(updatedAuthor.getId()).toBe(authorRequest.id);
+    expect(updatedAuthor.getNationality()).toBe(authorRequest.nationality);
   });
 
   it("deve atualizar data de nascimento do author", async () => {
@@ -70,8 +70,10 @@ describe("UpdateAuthor", () => {
     expect(updatedAuthor).toHaveProperty("birthDate");
     expect(updatedAuthor).toHaveProperty("books");
 
-    expect(updatedAuthor.id).toBe(authorRequest.id);
-    expect(updatedAuthor.birthDate.toISOString()).toBe(authorRequest.birthDate);
+    expect(updatedAuthor.getId()).toBe(authorRequest.id);
+    expect(updatedAuthor.getBirthDate().toISOString()).toBe(
+      authorRequest.birthDate
+    );
   });
 
   it("deve retornar um erro de DatabaseDataNotFoundError em um id inexistente", async () => {
