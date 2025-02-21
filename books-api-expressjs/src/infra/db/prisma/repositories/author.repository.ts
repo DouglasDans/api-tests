@@ -18,7 +18,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
       });
       return PrismaAuthorMapper.toDomain(prismaAuthor);
     } catch (error: any) {
-      throw new NotFoundError();
+      throw new Error(error);
     }
   }
 
@@ -47,7 +47,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(author);
     } catch (error: any) {
-      throw new NotFoundError();
+      throw new NotFoundError("Author not found");
     }
   }
 
@@ -60,7 +60,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(updatedAuthor);
     } catch (error) {
-      throw new NotFoundError();
+      throw new NotFoundError("Author not found");
     }
   }
 
@@ -76,7 +76,7 @@ export default class PrismaAuthorRepository implements IAuthorRepository {
 
       return PrismaAuthorMapper.toDomain(deletedAuthor);
     } catch (error) {
-      throw new NotFoundError();
+      throw new NotFoundError("Author not found");
     }
   }
 }

@@ -24,7 +24,7 @@ export class MockPublisherRepository implements IPublisherRepository {
       publishersList.find((publisher) => publisher.getId() === id) || null;
 
     if (!publisher) {
-      throw new NotFoundError();
+      throw new NotFoundError("Publisher not found");
     }
 
     return publisher;
@@ -38,7 +38,7 @@ export class MockPublisherRepository implements IPublisherRepository {
       ) || null;
 
     if (!publisher) {
-      throw new NotFoundError();
+      throw new NotFoundError("Publisher not found");
     }
 
     return new Publisher({
@@ -55,7 +55,7 @@ export class MockPublisherRepository implements IPublisherRepository {
       publishersList.find((publisher) => publisher.getId() === id) || null;
 
     if (!publisher) {
-      throw new NotFoundError();
+      throw new NotFoundError("Publisher not found");
     }
 
     return publisher;

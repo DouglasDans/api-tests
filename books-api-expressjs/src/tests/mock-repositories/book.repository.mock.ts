@@ -26,7 +26,7 @@ export class MockBookRepository implements IBookRepository {
     const book = booksList.find((book) => book.getId() === id) || null;
 
     if (!book) {
-      throw new NotFoundError();
+      throw new NotFoundError("Book not found");
     }
 
     return book;
@@ -38,7 +38,7 @@ export class MockBookRepository implements IBookRepository {
       booksList.find((book) => book.getId() === bookRequest.getId()) || null;
 
     if (!book) {
-      throw new NotFoundError();
+      throw new NotFoundError("Book not found");
     }
 
     return new Book({
@@ -57,7 +57,7 @@ export class MockBookRepository implements IBookRepository {
     const book = booksList.find((book) => book.getId() === id) || null;
 
     if (!book) {
-      throw new NotFoundError();
+      throw new NotFoundError("Book not found");
     }
 
     return book;
