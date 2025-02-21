@@ -36,8 +36,8 @@ model Book {
   description String
   publicationDate DateTime
 
-  autor Author @relation(fields: [autorId], references: [id])
-  autorId Int
-  editora Publisher @relation(fields: [editoraId], references: [id])
-  editoraId Int
+  author Author @relation(fields: [authorId], references: [id])
+  authorId Int
+  publisher Publisher @relation(fields: [publisherId], references: [id])
+  publisherId Int
 }
