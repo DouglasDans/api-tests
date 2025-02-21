@@ -7,18 +7,22 @@ export interface IBook {
   title: string;
   description: string;
   publicationDate: Date;
+  publisherId: number;
+  authorId: number;
   publisher?: Publisher;
-  authors?: Author[];
+  authors?: Author;
 }
 
 export class Book {
-  id?: number;
-  isbn: string;
-  title: string;
-  description: string;
-  publicationDate: Date;
-  publisher?: Publisher;
-  authors?: Author[];
+  private id?: number;
+  private isbn: string;
+  private title: string;
+  private description: string;
+  private publicationDate: Date;
+  private publisherId: number;
+  private authorId: number;
+  private publisher?: Publisher;
+  private authors?: Author;
 
   constructor(data: IBook) {
     this.id = data.id;
@@ -26,6 +30,8 @@ export class Book {
     this.title = data.title;
     this.description = data.description;
     this.publicationDate = data.publicationDate;
+    this.publisherId = data.publisherId;
+    this.authorId = data.authorId;
     this.publisher = data.publisher;
     this.authors = data.authors;
   }
@@ -48,6 +54,14 @@ export class Book {
 
   getPublicationDate(): Date {
     return this.publicationDate;
+  }
+
+  getPublisherId(): number {
+    return this.publisherId;
+  }
+
+  getAuthorId(): number {
+    return this.authorId;
   }
 
   getPublisher(): Publisher | null {

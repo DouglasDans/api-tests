@@ -9,11 +9,11 @@ export interface IPublisher {
 }
 
 export class Publisher {
-  id?: number;
-  name: string;
-  cnpj: string;
-  country: string;
-  books?: Book[];
+  private id?: number;
+  private name: string;
+  private cnpj: string;
+  private country: string;
+  private books?: Book[];
 
   constructor(data: IPublisher) {
     this.id = data.id;
