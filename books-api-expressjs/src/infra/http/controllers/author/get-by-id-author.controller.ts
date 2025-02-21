@@ -1,4 +1,3 @@
-import HttpError from "@/core/errors/http-error-response";
 import PrismaGetByIdAuthor from "@/infra/db/prisma/factories/author/get-by-id-author.factory";
 import { NextFunction, Request, Response } from "express";
 
