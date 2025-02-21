@@ -64,11 +64,11 @@ export class Book {
     return this.authorId;
   }
 
-  getPublisher(): Publisher | null {
-    return this.publisher || null;
+  getPublisher(): Publisher | undefined {
+    return this.publisher || undefined;
   }
 
-  getAuthors(): Author[] | null {
-    return this.authors || null;
+  getAuthors(): Author | undefined {
+    return this.authors || undefined;
   }
 }
