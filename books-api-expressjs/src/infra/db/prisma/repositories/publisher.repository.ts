@@ -35,14 +35,14 @@ export default class PrismaPublisherRepository implements IPublisherRepository {
     }
   }
 
-  async getById(id: number): Promise<Publisher | null> {
+  async getById(id: number): Promise<Publisher> {
     try {
       const publisher = await this.prisma.publisher.findFirst({
         where: { id },
       });
 
       if (publisher === null) {
-        return null;
+        throw new Error();
       }
 
       return PrismaPublisherMapper.toDomain(publisher);
@@ -54,7 +54,7 @@ export default class PrismaPublisherRepository implements IPublisherRepository {
   async update(publisher: Publisher): Promise<Publisher> {
     try {
       const updatedPublisher = await this.prisma.publisher.update({
-        where: { id: publisher.id },
+        where: { id: publisher.getId() },
         data: PrismaPublisherMapper.toPrisma(publisher),
       });
 
