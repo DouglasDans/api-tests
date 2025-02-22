@@ -25,4 +25,5 @@ export default async function updateAuthorRoute(
     }
     next(error);
   }
+  return;
 }

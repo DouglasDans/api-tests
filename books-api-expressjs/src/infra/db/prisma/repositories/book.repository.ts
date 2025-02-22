@@ -3,6 +3,7 @@ import IBookRepository from "@/core/repositories/book.repository.interface";
 import { PrismaClient } from "@/../node_modules/.prisma/client/index";
 import { PrismaBookMapper } from "../mappers/book.mapper";
 import { NotFoundError } from "@/core/errors/not-found.error";
+import { BadRequestError } from "@/core/errors/bad-request-error";
 
 export default class PrismaBookRepository implements IBookRepository {
   private prisma: PrismaClient;
@@ -18,7 +19,7 @@ export default class PrismaBookRepository implements IBookRepository {
       });
       return PrismaBookMapper.toDomain(prismaBook);
     } catch (error: any) {
-      throw new NotFoundError();
+      throw new BadRequestError(error);
     }
   }
 
@@ -30,9 +31,10 @@ export default class PrismaBookRepository implements IBookRepository {
           publisher: true,
         },
       });
+
       return books.map((book) => PrismaBookMapper.toDomain(book));
     } catch (error: any) {
-      throw new NotFoundError();
+      throw new Error();
     }
   }
 
@@ -52,7 +54,7 @@ export default class PrismaBookRepository implements IBookRepository {
 
       return PrismaBookMapper.toDomain(book);
     } catch (error: any) {
-      throw new NotFoundError();
+      throw new NotFoundError("Book not found");
     }
   }
 
@@ -60,12 +62,12 @@ export default class PrismaBookRepository implements IBookRepository {
     try {
       const updatedBook = await this.prisma.book.update({
         where: { id: book.getId() },
-        data: PrismaBookMapper.toPrisma(book),
+        data: PrismaBookMapper.toUpdatePrisma(book),
       });
 
       return PrismaBookMapper.toDomain(updatedBook);
     } catch (error) {
-      throw new NotFoundError();
+      throw new Error();
     }
   }
 
@@ -77,7 +79,7 @@ export default class PrismaBookRepository implements IBookRepository {
 
       return PrismaBookMapper.toDomain(deletedBook);
     } catch (error) {
-      throw new NotFoundError();
+      throw new NotFoundError("Book not found");
     }
   }
 }

@@ -17,6 +17,16 @@ export class PrismaBookMapper {
     return prismaBook;
   }
 
+  static toUpdatePrisma(book: Omit<Book, "id">): Prisma.BookUpdateInput {
+    const prismaBook: Prisma.BookUpdateInput = {
+      title: book.getTitle(),
+      description: book.getDescription(),
+      isbn: book.getIsbn(),
+      publicationDate: book.getPublicationDate(),
+    };
+    return prismaBook;
+  }
+
   static toDomain(prismaAuthor: PrismaBook): Book {
     const book: Book = new Book({
       id: prismaAuthor.id,

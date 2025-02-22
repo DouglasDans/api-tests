@@ -4,6 +4,8 @@ import PrismaAuthorRepository from "../../repositories/author.repository";
 import PrismaPublisherRepository from "../../repositories/publisher.repository";
 import { CreateAuthor } from "@/use-cases/author/create-author";
 import { CreatePublisher } from "@/use-cases/publisher/create-publisher";
+import { GetAuthorById } from "../../../../../use-cases/author/get-by-id-author";
+import { GetByIdPublisher } from "../../../../../use-cases/publisher/get-by-id-publisher";
 
 export class PrismaCreateBook {
   static create(): CreateBook {
@@ -12,10 +14,14 @@ export class PrismaCreateBook {
     const publisherRepository = new PrismaPublisherRepository();
 
     const createAuthor = new CreateAuthor(authorRepository);
+    const getAuthorById = new GetAuthorById(authorRepository);
+    const getByIdPublisher = new GetByIdPublisher(publisherRepository);
     const createPublisher = new CreatePublisher(publisherRepository);
     const createBook = new CreateBook(
       bookRepository,
       createAuthor,
+      getAuthorById,
+      getByIdPublisher,
       createPublisher
     );
 
