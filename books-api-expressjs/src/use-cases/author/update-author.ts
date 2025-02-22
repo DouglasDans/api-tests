@@ -24,10 +24,6 @@ export class UpdateAuthor {
 
     const findAuthor = await this.authorRepository.getById(authorRequest.id);
 
-    if (!findAuthor) {
-      throw new NotFoundError();
-    }
-
     const toUpdateAuthor = new Author({
       id: findAuthor.getId(),
       name: formattedAuthor.name || findAuthor.getName(),

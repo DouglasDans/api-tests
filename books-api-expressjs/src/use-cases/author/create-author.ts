@@ -2,12 +2,6 @@ import { Author } from "@/core/entities/author.entity";
 import { MissingAttributesError } from "@/core/errors/missing-attributes-error";
 import IAuthorRepository from "@/core/repositories/author.repository.interface";
 
-interface AuthorRequest {
-  name: string;
-  nationality: string;
-  birthDate: string;
-}
-
 export class CreateAuthor {
   constructor(private authorRepository: IAuthorRepository) {}
 
