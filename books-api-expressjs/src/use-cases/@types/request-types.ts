@@ -14,7 +14,9 @@ interface BookRequest {
   isbn: string;
   title: string;
   description: string;
-  publicationDate: Date;
-  publisher: PublisherRequest;
-  author: AuthorRequest;
+  publicationDate: string;
+  publisherId?: number;
+  authorId?: number;
+  publisher?: PublisherRequest;
+  author?: AuthorRequest;
 }

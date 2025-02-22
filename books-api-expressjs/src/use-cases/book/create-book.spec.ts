@@ -7,6 +7,8 @@ import { CreatePublisher } from "../publisher/create-publisher";
 import { MockAuthorRepository } from "@/tests/mock-repositories/author.repository.mock";
 import { MockPublisherRepository } from "@/tests/mock-repositories/publisher.repository.mock";
 import { Book } from "@/core/entities/book.entity";
+import { GetAuthorById } from "../author/get-by-id-author";
+import { GetByIdPublisher } from "../publisher/get-by-id-publisher";
 
 describe("CreateBook", () => {
   const mockBookRepository = new MockBookRepository();
@@ -15,9 +17,13 @@ describe("CreateBook", () => {
 
   const createAuthor = new CreateAuthor(mockAuthorRepository);
   const createPublisher = new CreatePublisher(mockPublisherRepository);
+  const getAuthorById = new GetAuthorById(mockAuthorRepository);
+  const getByIdPublisher = new GetByIdPublisher(mockPublisherRepository);
   const createBook = new CreateBook(
     mockBookRepository,
     createAuthor,
+    getAuthorById,
+    getByIdPublisher,
     createPublisher
   );
 
@@ -43,7 +49,7 @@ describe("CreateBook", () => {
       isbn: faker.helpers.replaceSymbols("#############"),
       title: faker.lorem.words(3),
       description: faker.lorem.paragraph(),
-      publicationDate: faker.date.past(),
+      publicationDate: faker.date.past().toISOString(),
       publisher: requestPublisher,
       author: requestAuthor,
     };
@@ -69,7 +75,7 @@ describe("CreateBook", () => {
       isbn: faker.helpers.replaceSymbols("#############"),
       title: faker.lorem.words(3),
       description: faker.lorem.paragraph(),
-      publicationDate: faker.date.past(),
+      publicationDate: faker.date.past().toISOString(),
       publisher: {
         name: "",
         cnpj: "",
@@ -81,16 +87,16 @@ describe("CreateBook", () => {
     const result = createBook.execute(requestBook);
 
     await expect(result).rejects.toThrowError(
-      "Alguns atributos obrigatórios não foram informados"
+      "Publisher ID or Publisher data must be provided"
     );
   });
 
-  it("deve lançar erro se não houver editora", async () => {
+  it("deve lançar erro se não houver Author", async () => {
     const requestBook = {
       isbn: faker.helpers.replaceSymbols("#############"),
       title: faker.lorem.words(3),
       description: faker.lorem.paragraph(),
-      publicationDate: faker.date.past(),
+      publicationDate: faker.date.past().toISOString(),
       publisher: requestPublisher,
       author: { name: "", nationality: "", birthDate: "" },
     };
@@ -98,7 +104,7 @@ describe("CreateBook", () => {
     const result = createBook.execute(requestBook);
 
     await expect(result).rejects.toThrowError(
-      "Alguns atributos obrigatórios não foram informados"
+      "Author ID or Author data must be provided"
     );
   });
 });
