@@ -4,10 +4,6 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-gradle-wrapper.jar
-gradlew
-gradlew.bat
-
 ### STS ###
 .apt_generated
 .classpath
