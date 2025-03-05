@@ -1,6 +1,0 @@
-[build]
-builder = "gradle"
-buildCommand = "./gradlew clean build --no-daemon"
-
-[deploy]
-startCommand = "java -jar build/libs/seu-projeto-0.0.1-SNAPSHOT.jar"
